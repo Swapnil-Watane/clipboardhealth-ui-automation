@@ -9,17 +9,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class DashboardPage {
-    public WebDriver driver;
+public class DashboardPage extends PageObjectBaseClass {
+
+    @FindBy(css = "#nav-signin-tooltip a[data-nav-ref='nav_custrec_signin']")
+    private WebElement signInPopUp;
 
     public DashboardPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver,this);
+        super(driver);
         driver.switchTo().defaultContent();
         new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(500)).until(ExpectedConditions.invisibilityOf(signInPopUp));
     }
 
-    @FindBy(css = "#nav-signin-tooltip a[data-nav-ref='nav_custrec_signin']")
-    private WebElement signInPopUp;
+    public NavigationZone getNavigationZone(){
+        return new NavigationZone(driver);
+    }
 
 }
