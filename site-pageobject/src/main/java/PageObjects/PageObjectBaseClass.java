@@ -31,6 +31,10 @@ public abstract class PageObjectBaseClass {
         return expectedElement;
     }
 
+    protected void scrollIntoView(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
     protected <W extends PageObjectBaseClass> W click(WebElement element, Class<W> nextPageClass) {
         element.click();
         return waitForNextPage(driver, nextPageClass, DefaultWaitForPage);

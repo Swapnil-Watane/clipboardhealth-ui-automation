@@ -16,8 +16,7 @@ public class HamburgerMenuPage extends PageObjectBaseClass{
     @FindBy(css = "#hmenu-content")
     private WebElement hamburgerMenu;
 
-    // #hmenu-content ul li a.hmenu-item
-    @FindBy(css = "#hmenu-content ul li")
+    @FindBy(css = "#hmenu-content ul.hmenu-visible li")
     private List<WebElement> hamburgeMenuItemList;
 
     public HamburgerMenuPage(WebDriver driver) {
@@ -26,10 +25,16 @@ public class HamburgerMenuPage extends PageObjectBaseClass{
         new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(500)).until(ExpectedConditions.visibilityOf(hamburgerMenu));
     }
 
-    public HamburgerMenuPage hamburgerMenuSelect(String menuItemText) {
+    public HamburgerMenuPage selectMenuAndWaitToSelectSubMenu(String menuItemText) {
         HamburgerMenuContainer container = new HamburgerMenuContainer(driver, hamburgeMenuItemList);
         WebElement element = container.getSelectedElement(menuItemText);
         return click(element, HamburgerMenuPage.class);
+    }
+
+    public BrowseCategoryPage selectSubMenuAndSeeResults(String menuItemText) {
+        HamburgerMenuContainer container = new HamburgerMenuContainer(driver, hamburgeMenuItemList);
+        WebElement element = container.getSelectedElement(menuItemText);
+        return click(element, BrowseCategoryPage.class);
     }
 
 
@@ -50,13 +55,12 @@ public class HamburgerMenuPage extends PageObjectBaseClass{
             };
         }
 
-        public WebElement getSelectedElement(String itemText) {
-            return this.getElementBasedOn(elementWithMatchingText(menuLink,itemText));
-        }
-
         private WebElement getElementBasedOn(Predicate<WebElement> criteria) {
             return (WebElement) this.parentElement.stream().filter(criteria).findFirst().orElse((WebElement) null);
         }
 
+        public WebElement getSelectedElement(String itemText) {
+            return this.getElementBasedOn(elementWithMatchingText(menuLink,itemText));
+        }
     }
 }
