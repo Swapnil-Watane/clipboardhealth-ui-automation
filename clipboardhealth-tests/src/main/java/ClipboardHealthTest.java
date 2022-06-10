@@ -11,7 +11,11 @@ public class ClipboardHealthTest extends TestBaseClass {
     public void testNavigateToSecondHighestPriceItemOnAmazon() throws Exception {
         DashboardPage dashboardPage = new DashboardPage(driver);
         HamburgerMenuPage menuPage = dashboardPage.getNavigationZone().goToHamburgerMenu();
-        menuPage.selectMenuAndWaitToSelectSubMenu("TV, Appliances, Electronics").selectSubMenuAndSeeResults("Televisions").refineBasedOn("Brands","Samsung");
+        menuPage.selectMenuAndWaitToSelectSubMenu("TV, Appliances, Electronics")
+                .selectSubMenuAndSeeResults("Televisions")
+                .refineBasedOn("Brands","Samsung")
+                .sortBasedOn("Price: High to Low")
+                .selectResultBasedOnItemLocation(2);
 
         sleep(5000);
     }

@@ -32,52 +32,27 @@ public class BrowseCategoryPage extends PageObjectBaseClass  {
     }
 
 
-    public ResultPage refineBasedOn(String category, String filter){
+    public SearchResultPage refineBasedOn(String category, String filter){
         RefinementContainer categoryContainer = new RefinementContainer(driver, refinementCategoryList);
         int index = categoryContainer.getIndexOfElement(category);
-        WebElement element = categoryContainer.getElement(index);
+        WebElement element = categoryContainer.getParentElementWithIndex(index);
         scrollIntoView(element);
         RefinementContainer filterContainer = new RefinementContainer(driver, element.findElements(checkList));
         WebElement filterCheck = filterContainer.getSelectedElement(filter).findElement(filterCheckBox);
-        return click(filterCheck, ResultPage.class);
+        return click(filterCheck, SearchResultPage.class);
     }
 
-    private static final class RefinementContainer extends PageObjectBaseClass{
-        private List<WebElement> parentElement;
+    private static final class RefinementContainer extends ContainerBaseClass{
+
         private By categoryNameBy = By.cssSelector("div.a-spacing-small span");
         private By checkBoxNameBy = By.cssSelector("a.a-link-normal");
 
-
         public RefinementContainer(WebDriver driver, List<WebElement> list) {
-            super(driver);
-            this.parentElement = list;
-        }
-
-        private static Predicate<WebElement> elementWithMatchingText(By by, String expectedText) {
-            return (we) -> {
-                return we.findElements(by).stream().map(WebElement::getText).map(String::trim).anyMatch((actualText) -> {
-                    return actualText.equals(expectedText);
-                });
-            };
-        }
-
-        private int getIndexOfElementBasedOn(Predicate<WebElement> criteria) {
-            return (int) StreamEx.of(this.parentElement).indexOf(criteria).orElse(-1L);
+            super(driver, list);
         }
 
         public int getIndexOfElement(String categoryName){
             return this.getIndexOfElementBasedOn(elementWithMatchingText(categoryNameBy, categoryName));
-        }
-
-        public WebElement getElement(int index) {
-            if (index < 0) {
-                throw new IndexOutOfBoundsException("Index out of bounds:" + index);
-            }
-            return (WebElement) this.parentElement.get(index);
-        }
-
-        private WebElement getElementBasedOn(Predicate<WebElement> criteria) {
-            return (WebElement) this.parentElement.stream().filter(criteria).findFirst().orElse((WebElement) null);
         }
 
         public WebElement getSelectedElement(String itemText) {

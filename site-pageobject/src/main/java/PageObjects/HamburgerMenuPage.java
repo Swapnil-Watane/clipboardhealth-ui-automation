@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
-import java.util.function.Predicate;
 
 public class HamburgerMenuPage extends PageObjectBaseClass{
 
@@ -37,26 +36,11 @@ public class HamburgerMenuPage extends PageObjectBaseClass{
         return click(element, BrowseCategoryPage.class);
     }
 
-
-    private static final class HamburgerMenuContainer  extends PageObjectBaseClass{
-        private List<WebElement> parentElement;
+    private static final class HamburgerMenuContainer  extends ContainerBaseClass{
         private By menuLink = By.cssSelector("a.hmenu-item");
 
         public HamburgerMenuContainer(WebDriver driver, List<WebElement> list) {
-            super(driver);
-            this.parentElement = list;
-        }
-
-        private static Predicate<WebElement> elementWithMatchingText(By by, String expectedText) {
-            return (we) -> {
-                return we.findElements(by).stream().map(WebElement::getText).map(String::trim).anyMatch((actualText) -> {
-                    return actualText.equals(expectedText);
-                });
-            };
-        }
-
-        private WebElement getElementBasedOn(Predicate<WebElement> criteria) {
-            return (WebElement) this.parentElement.stream().filter(criteria).findFirst().orElse((WebElement) null);
+            super(driver, list);
         }
 
         public WebElement getSelectedElement(String itemText) {
