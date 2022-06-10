@@ -10,7 +10,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.lang.reflect.InvocationTargetException;
 import java.time.Duration;
+import java.util.Iterator;
 import java.util.Objects;
+import java.util.Set;
 
 public abstract class PageObjectBaseClass {
     protected final WebDriver driver;
@@ -23,6 +25,34 @@ public abstract class PageObjectBaseClass {
 
     protected void click(WebElement element) {
         element.click();
+    }
+
+    protected <W extends PageObjectBaseClass> W clickOpenInNewTab(WebElement element, Class<W> nextPage) {
+        this.click(element);
+        this.switchWindow();
+        return (W) new WebDriverWait(driver, Duration.ofSeconds(DefaultWaitForPage),Duration.ofMillis(500)).withMessage("Time out waiting for next page: " + nextPage.getName()).until(pageLoaded(nextPage));
+    }
+
+    private String switchWindow() {
+        String currentWindowHandle = this.driver.getWindowHandle();
+        new WebDriverWait(driver, Duration.ofSeconds(DefaultWaitForPage), Duration.ofMillis(500)).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply (WebDriver driver) {
+                Set<String> windows = driver.getWindowHandles();
+                return windows.size() > 1;
+            }
+        });
+        Set<String> windows = this.driver.getWindowHandles();
+        Iterator wins = windows.iterator();
+
+        while (wins.hasNext()) {
+            String window = (String) wins.next();
+            if (!window.equals(currentWindowHandle)) {
+                this.driver.switchTo().window(window);
+                break;
+            }
+        }
+
+        return this.driver.getTitle();
     }
 
     protected WebElement click(WebElement currentElement, WebElement expectedElement){

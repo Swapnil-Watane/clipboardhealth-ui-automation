@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+    <line>
+      <![CDATA[About this item
+Resolution : 4K Ultra HD (3840 x 2160) Resolution | Refresh Rate : 120 Hertz
+Connectivity: 4 HDMI ports to connect set top box, Blu-ray speakers or a gaming console | 2 USB ports to connect hard drives or other USB devices | One Connect Box for all your connectivity needs
+Sound: 60 Watts Output | Powerful Speakers with Dolby Digital Plus
+Smart TV Features : Prime Video, Hotstar, Netflix, Zee5 and many more | PC Mode | Universal Guide | Web Browser | Screen Mirroring
+Display: 100% Color Volume | Quantum HDR | Quantum Processor | HLG | Mega Contrast | Supreme UHD Dimming
+› See more product details]]>
+    </line>
+  </reporter-output>
+  <suite name="Default Suite" duration-ms="23459" started-at="2022-06-10T15:23:41 MDT" finished-at="2022-06-10T15:24:05 MDT">
+    <groups>
+      <group name="regression">
+        <method signature="ClipboardHealthTest.testNavigateToSecondHighestPriceItemOnAmazon()[pri:0, instance:ClipboardHealthTest@53f65459]" name="testNavigateToSecondHighestPriceItemOnAmazon" class="ClipboardHealthTest"/>
+      </group> <!-- regression -->
+    </groups>
+    <test name="clipboardhealth-ui-automation" duration-ms="23459" started-at="2022-06-10T15:23:41 MDT" finished-at="2022-06-10T15:24:05 MDT">
+      <class name="ClipboardHealthTest">
+        <test-method status="PASS" signature="setup()[pri:0, instance:ClipboardHealthTest@53f65459]" name="setup" is-config="true" duration-ms="9692" started-at="2022-06-10T15:23:41 MDT" finished-at="2022-06-10T15:23:51 MDT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="testNavigateToSecondHighestPriceItemOnAmazon()[pri:0, instance:ClipboardHealthTest@53f65459]" name="testNavigateToSecondHighestPriceItemOnAmazon" duration-ms="13486" started-at="2022-06-10T15:23:51 MDT" description="Navigate to second highest price product on Amazon search" finished-at="2022-06-10T15:24:05 MDT">
+          <reporter-output>
+            <line>
+              <![CDATA[About this item
+Resolution : 4K Ultra HD (3840 x 2160) Resolution | Refresh Rate : 120 Hertz
+Connectivity: 4 HDMI ports to connect set top box, Blu-ray speakers or a gaming console | 2 USB ports to connect hard drives or other USB devices | One Connect Box for all your connectivity needs
+Sound: 60 Watts Output | Powerful Speakers with Dolby Digital Plus
+Smart TV Features : Prime Video, Hotstar, Netflix, Zee5 and many more | PC Mode | Universal Guide | Web Browser | Screen Mirroring
+Display: 100% Color Volume | Quantum HDR | Quantum Processor | HLG | Mega Contrast | Supreme UHD Dimming
+› See more product details]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- testNavigateToSecondHighestPriceItemOnAmazon -->
+        <test-method status="PASS" signature="rollback()[pri:0, instance:ClipboardHealthTest@53f65459]" name="rollback" is-config="true" duration-ms="257" started-at="2022-06-10T15:24:05 MDT" finished-at="2022-06-10T15:24:05 MDT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- rollback -->
+      </class> <!-- ClipboardHealthTest -->
+    </test> <!-- clipboardhealth-ui-automation -->
+  </suite> <!-- Default Suite -->
+</testng-results>

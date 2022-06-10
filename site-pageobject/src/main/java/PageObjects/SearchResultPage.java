@@ -33,10 +33,10 @@ public class SearchResultPage extends PageObjectBaseClass{
         return this;
     }
 
-    public void selectResultBasedOnItemLocation(int location) {
+    public ProductPage selectResultBasedOnItemLocation(int location) {
         SearchResultContainer container = new SearchResultContainer(driver, resultList);
         WebElement element = container.getSubElementOfParentElementAtIndex(location-1);
-        click(element);
+        return clickOpenInNewTab(element, ProductPage.class);
     }
 
     private static final class SearchResultContainer extends ContainerBaseClass {
